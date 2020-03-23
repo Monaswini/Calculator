@@ -31,27 +31,69 @@ input[type=text] {
                <td><input class='myclass'type="button" name="one" value="1" onclick="display.value += '1'"></td>
                <td><input class='myclass'type="button" name="two" value="2" onclick="display.value += '2'"></td>
                <td><input class='myclass'type="button" name="three" value="3" onclick="display.value += '3'"></td>
-               <td><input class='myclass'type="button" name="plus" value="+" onclick="display.value += '+'"></td>
+               <!-- <td><input class='myclass'type="button" name="plus" value="+" onclick="display.value += '+'"></td> -->
+			   <td><input class='myclass'type="button" name="plus" value="+" onclick="convert('+')"></td>
+
             </tr>
             <tr>
                <td><input class='myclass'type="button" name="four" value="4" onclick="display.value += '4'"></td>
                <td><input class='myclass'type="button" name="five" value="5" onclick="display.value += '5'"></td>
                <td><input class='myclass'type="button" name="six" value="6" onclick="display.value += '6'"></td>
-               <td><input class='myclass'type="button" name="minus" value="-" onclick="display.value += '-'"></td>
+               <td><input class='myclass'type="button" name="minus" value="-" onclick="convert('-')"></td>
             </tr>
             <tr>
                <td><input class='myclass'type="button" name="seven" value="7" onclick="display.value += '7'"></td>
                <td><input class='myclass'type="button" name="eight" value="8" onclick="display.value += '8'"></td>
                <td><input class='myclass'type="button" name="nine" value="9" onclick="display.value += '9'"></td>
-               <td><input class='myclass'type="button" name="times" value="x" onclick="display.value += '*'"></td>
+               <td><input class='myclass'type="button" name="times" value="x" onclick="convert('*')"></td>
             </tr>
             <tr>
                <td><input class='myclass'type="button" id="clear" name="clear" value="C" onclick="display.value = ''"></td>
                <td><input class='myclass'type="button" name="zero" value="0" onclick="display.value += '0'"></td>
-               <td><input class='myclass'type="button" name="result" value="=" onclick="display.value = eval(display.value)"></td>
-               <td><input class='myclass'type="button" name="div" value="/" onclick="display.value += '/'"></td>
+               <!-- <td><input class='myclass'type="button" name="result" value="=" onclick="display.value = eval(display.value)"></td> -->
+			   <td><input class='myclass'type="button" name="result" value="=" onclick="Evaluate()"></td>
+               <td><input class='myclass'type="button" name="div" value="/" onclick="convert('/')"></td>
             </tr>
          </table>
       </form>
+	  
+	  <script>
+			function convert(operator)
+			{
+				var lastPos = display.value.length - 1;
+				
+				if(lastPos<0)
+				{
+				    display.value='';
+					return;
+				}
+				
+				var lastChar = display.value.charAt(lastPos);
+				
+				if(isOperator(lastChar))
+				{
+					display.value = display.value.substring(0, lastPos) + operator;
+				}
+				else{
+					display.value+=operator;
+				}
+			}
+			function Evaluate()
+			{
+				var lastPos = display.value.length - 1;
+				var lastChar = display.value.charAt(lastPos);
+				if(isOperator(lastChar))
+					display.value='';
+				else
+					display.value=eval(display.value);
+			}
+			function isOperator(operator){
+				if(operator=='+'||operator=='-'||operator=='*'||operator=='/')
+					return true;
+				return false;
+				}
+			
+			
+	  </script>
    </body>
    </html>
